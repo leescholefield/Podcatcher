@@ -9,3 +9,4 @@ UI:
 		-- Search - search for a podcast (via itunes)
 
 MediaPlayback
+	-- play /pause
