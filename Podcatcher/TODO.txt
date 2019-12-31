@@ -1,0 +1,11 @@
+﻿Feed deserialization:
+	-- XmlConverter / itunes result converter
+		-- clean code
+
+UI:
+	ViewModels:
+		-- PodcastViewModel - display single podcast
+		-- PodcastList - display list of podcasts
+		-- Search - search for a podcast (via itunes)
+
+MediaPlayback
