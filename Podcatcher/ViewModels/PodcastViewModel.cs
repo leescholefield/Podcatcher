@@ -1,4 +1,6 @@
 ﻿using Podcatcher.Models;
+using Podcatcher.ViewModels.Commands;
+using System.Windows.Input;
 
 namespace Podcatcher.ViewModels
 {
@@ -21,6 +23,18 @@ namespace Podcatcher.ViewModels
             }
         }
 
+        public ICommand PlayCommand { get; set; }
+
         #endregion
+
+        protected override void InitializeCommands()
+        {
+            PlayCommand = new RelayCommand<Episode>(PlayCommand_Execute);
+        }
+
+        private void PlayCommand_Execute(Episode episode)
+        {
+
+        }
     }
 }
