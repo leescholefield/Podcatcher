@@ -27,6 +27,20 @@ namespace Podcatcher.ViewModels
             }
         }
 
+        private string _pageTitle;
+        public string PageTitle
+        {
+            get
+            {
+                return _pageTitle;
+            }
+            set
+            {
+                _pageTitle = value;
+                OnPropertyChanged("PageTitle");
+            }
+        }
+
         /// <summary>
         /// Opens a <see cref="PodcastViewModel"/> with the passed Podcast.
         /// </summary>
