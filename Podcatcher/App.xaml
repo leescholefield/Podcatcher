@@ -10,5 +10,9 @@
              DataType="{x:Type vm:PodcastViewModel}">
             <v:PodcastView />
         </DataTemplate>
+        <DataTemplate
+            DataType="{x:Type vm:PodcastListViewModel}">
+            <v:PodcastListView />
+        </DataTemplate>
     </Application.Resources>
 </Application>
