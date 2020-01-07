@@ -61,6 +61,7 @@
     </ApplicationDefinition>
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\Commands\RelayCommand.cs" />
+    <Compile Include="ViewModels\Commands\SubscribeCommand.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\PodcastListView.cs" />
     <Compile Include="ViewModels\PodcastViewModel.cs" />

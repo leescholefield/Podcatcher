@@ -45,7 +45,7 @@ namespace Podcatcher.ViewModels
         protected override void InitializeCommands()
         {
             DisplayPodcastCommand = new RelayCommand<Podcast>(DisplayPodcastCommand_Execute);
-            SubscribeToPodcast = new RelayCommand<Podcast>(SubscribeToPodcast_Execute);
+            SubscribeToPodcast = new SubscribeCommand();
         }
 
         private void DisplayPodcastCommand_Execute(Podcast podcast)
