@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Windows.Input;
 using Podcatcher.Models;
 using Podcatcher.ViewModels.Commands;
@@ -25,8 +24,6 @@ namespace Podcatcher.ViewModels
             {
                 _podcasts = value;
                 OnPropertyChanged("Podcasts");
-
-
             }
         }
 
