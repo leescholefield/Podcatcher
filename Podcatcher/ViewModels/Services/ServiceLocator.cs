@@ -29,7 +29,7 @@ namespace Podcatcher.ViewModels.Services
         {
             registeredServices = new Dictionary<object, object>
             {
-                
+                {typeof(INavigationService), new NavigationService() }
             };
 
         }
@@ -51,5 +51,4 @@ namespace Podcatcher.ViewModels.Services
             }
         }
     }
-}
 }
