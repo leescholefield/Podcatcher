@@ -4,6 +4,9 @@ using System.Windows.Input;
 
 namespace Podcatcher.ViewModels
 {
+    /// <summary>
+    /// ViewModel for displaying a single <see cref="Podcast"/> object. 
+    /// </summary>
     public class PodcastViewModel : BaseViewModel
     {
 
