@@ -12,7 +12,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ListBoxItem">
-                        <Grid Margin="0, 0, 0, 5">
+                        <Grid Margin="0, 0, 0, 5" Height="100">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="2*" />
                                 <RowDefinition Height="2*" />
@@ -51,11 +51,11 @@
         </Grid.RowDefinitions>
 
         <!-- Heading title -->
-        <StackPanel Grid.Column="0" MaxHeight="200" >
+        <StackPanel Grid.Row="0" MaxHeight="200" >
             <Label Content="{Binding PageTitle}" />
         </StackPanel>
         
         <!-- List box -->
-        <ListBox Grid.Column="1" ItemsSource="{Binding Podcasts}" ItemContainerStyle="{StaticResource podcastTemplate}" />
+        <ListBox Grid.Row="1" ItemsSource="{Binding Podcasts}" ItemContainerStyle="{StaticResource podcastTemplate}" />
     </Grid>
 </UserControl>
