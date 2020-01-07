@@ -2,6 +2,7 @@
 using System.Windows.Input;
 using Podcatcher.Models;
 using Podcatcher.ViewModels.Commands;
+using Podcatcher.ViewModels.Services;
 
 namespace Podcatcher.ViewModels
 {
@@ -61,7 +62,7 @@ namespace Podcatcher.ViewModels
 
         private void DisplayPodcastCommand_Execute(Podcast podcast)
         {
-
+            ServiceLocator.Instance.GetService<INavigationService>().NavigateTo<PodcastViewModel>(podcast);
         }
 
     }
