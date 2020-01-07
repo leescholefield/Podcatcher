@@ -6,6 +6,41 @@
              xmlns:local="clr-namespace:Podcatcher.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <Style x:Key="podcastTemplate" TargetType="ListBoxItem">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Grid Margin="0, 0, 0, 5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="2*" />
+                                <RowDefinition Height="2*" />
+                                <RowDefinition Height="4*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <!-- Image -->
+                                <ColumnDefinition Width="2*" />
+                                <!-- Details -->
+                                <ColumnDefinition Width="8*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Rectangle Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Grid.ColumnSpan="2" Fill="Transparent" Stroke="LightGray" StrokeThickness="1"/>
+
+                            <Image Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" 
+                                   Source="{Binding ImageUrl}" Stretch="Uniform"/>
+                            
+                            <Label Grid.Row="0" Grid.Column="1" Content="{Binding Title}" />
+                            <Label Grid.Row="1" Grid.Column="1" Content="{Binding Author}" />
+                            <Label Grid.Row="2" Grid.Column="1" Content="{Binding Description}" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    
+
     <Grid>
 
         <Grid.RowDefinitions>
@@ -16,8 +51,11 @@
         </Grid.RowDefinitions>
 
         <!-- Heading title -->
-        <StackPanel Grid.Column="0">
+        <StackPanel Grid.Column="0" MaxHeight="200" >
             <Label Content="{Binding PageTitle}" />
         </StackPanel>
+        
+        <!-- List box -->
+        <ListBox Grid.Column="1" ItemsSource="{Binding Podcasts}" ItemContainerStyle="{StaticResource podcastTemplate}" />
     </Grid>
 </UserControl>
