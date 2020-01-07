@@ -53,12 +53,5 @@ namespace Podcatcher.ViewModels
 
         }
 
-        private void SubscribeToPodcast_Execute(Podcast podcast)
-        {
-            throw new NotImplementedException();
-        }
-
-
-
     }
 }
