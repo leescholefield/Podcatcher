@@ -62,6 +62,7 @@
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\Commands\RelayCommand.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\PodcastListView.cs" />
     <Compile Include="ViewModels\PodcastViewModel.cs" />
     <Compile Include="Views\PodcastView.xaml.cs">
       <DependentUpon>PodcastView.xaml</DependentUpon>
