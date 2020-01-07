@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Podcatcher.Views"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
@@ -29,10 +30,17 @@
 
                             <Image Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" 
                                    Source="{Binding ImageUrl}" Stretch="Uniform"/>
-                            
+
                             <Label Grid.Row="0" Grid.Column="1" Content="{Binding Title}" />
                             <Label Grid.Row="1" Grid.Column="1" Content="{Binding Author}" />
                             <Label Grid.Row="2" Grid.Column="1" Content="{Binding Description}" />
+
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseLeftButtonUp">
+                                    <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource FindAncestor, 
+                                        AncestorType={x:Type UserControl}}, Path=DataContext.DisplayPodcastCommand}" CommandParameter="{Binding}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>
