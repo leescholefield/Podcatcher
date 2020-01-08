@@ -32,7 +32,22 @@ namespace Podcatcher.Models.Deserialization
 
         public List<Episode> DeserializeEpisodes(string url)
         {
-            return new List<Episode>();
+            string contents;
+            if (IsLocalFile(url))
+            {
+                contents = ReadFileContents(url);
+            }
+            else
+            {
+                contents = GetBodyFromUrl(url);
+            }
+
+            if (contents == null)
+            {
+                throw new Exception("Could not read contents");
+            }
+
+            return XmlConverter.ConvertEpisodes(contents);
         }
 
         private bool IsLocalFile(string path)
