@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Podcatcher.Models.Deserialization;
+using System;
 using System.Collections.Generic;
 
 namespace Podcatcher.ViewModels.Services
@@ -29,7 +30,8 @@ namespace Podcatcher.ViewModels.Services
         {
             registeredServices = new Dictionary<object, object>
             {
-                {typeof(INavigationService), new NavigationService() }
+                {typeof(INavigationService), new NavigationService() },
+                {typeof(IRssDeserializer), new RssDeserializer(new PodcastDeserializer())}
             };
 
         }
