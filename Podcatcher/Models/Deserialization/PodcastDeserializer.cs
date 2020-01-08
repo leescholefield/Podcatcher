@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 
@@ -27,6 +28,11 @@ namespace Podcatcher.Models.Deserialization
             }
 
             return XmlConverter.Convert(contents);
+        }
+
+        public List<Episode> DeserializeEpisodes(string url)
+        {
+            return new List<Episode>();
         }
 
         private bool IsLocalFile(string path)
