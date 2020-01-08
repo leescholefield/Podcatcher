@@ -1,6 +1,8 @@
 ﻿using Podcatcher.Models;
 using Podcatcher.ViewModels.Commands;
+using Podcatcher.ViewModels.Services;
 using System.Windows.Input;
+using System;
 
 namespace Podcatcher.ViewModels
 {
@@ -22,6 +24,8 @@ namespace Podcatcher.ViewModels
             set
             {
                 _podcast = value;
+                if (value.Episodes.Count == 0)
+                    DeserializeEpisodes();
                 OnPropertyChanged("Podcast");
             }
         }
@@ -30,14 +34,30 @@ namespace Podcatcher.ViewModels
 
         #endregion
 
+        #region Initialization
+
+
         protected override void InitializeCommands()
         {
             PlayCommand = new RelayCommand<Episode>(PlayCommand_Execute);
         }
 
+        #endregion
+
         private void PlayCommand_Execute(Episode episode)
         {
 
+        }
+
+        private void DeserializeEpisodes()
+        {
+            if (Podcast.FeedUrl == null || Podcast.FeedUrl.Equals(""))
+            {
+                throw new InvalidOperationException("Podcast does not a a FeedUrl set");
+            }
+
+            var eps = ServiceLocator.Instance.GetService<IRssDeserializer>().DeserializeEpisodes(Podcast.FeedUrl);
+            Podcast.Episodes = eps;
         }
     }
 }
