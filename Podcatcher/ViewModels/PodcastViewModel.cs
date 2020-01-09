@@ -32,6 +32,8 @@ namespace Podcatcher.ViewModels
 
         public ICommand PlayCommand { get; set; }
 
+        public ICommand SubscribeCommand { get; set; }
+
         #endregion
 
         #region Initialization
@@ -40,6 +42,7 @@ namespace Podcatcher.ViewModels
         protected override void InitializeCommands()
         {
             PlayCommand = new RelayCommand<Episode>(PlayCommand_Execute);
+            SubscribeCommand = new SubscribeCommand();
         }
 
         #endregion
