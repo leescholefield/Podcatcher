@@ -1,4 +1,5 @@
 ﻿using Podcatcher.Models;
+using Podcatcher.ViewModels.Services;
 using System;
 
 namespace Podcatcher.ViewModels.Commands
@@ -14,7 +15,8 @@ namespace Podcatcher.ViewModels.Commands
 
         private static void Subscribe_Execute(Podcast podcast)
         {
-
+            var ser = ServiceLocator.Instance.GetService<ISubscriptionService>();
+            ser.Subscribe(podcast);
         }
     }
 }
