@@ -1,0 +1,23 @@
+﻿using Podcatcher.Models;
+using System.Collections.Generic;
+
+namespace Podcatcher.ViewModels.Services
+{
+    /// <summary>
+    /// Service that allows you to add a <see cref="Podcast"/> to your subscriptions, as well as retrieve a list of subscribed Podcasts
+    /// </summary>
+    public interface ISubscriptionService
+    {
+
+        /// <summary>
+        /// Adds <paramref name="podcast"/> to the user's subcriptions.
+        /// </summary>
+        void Subscribe(Podcast podcast);
+
+        /// <summary>
+        /// Returns a list of the user's subscribed <see cref="Podcast"/>s. If there is no subribed podcasts this will return an empty list.
+        /// </summary>
+        /// <returns></returns>
+        List<Podcast> GetSubscriptions();
+    }
+}
