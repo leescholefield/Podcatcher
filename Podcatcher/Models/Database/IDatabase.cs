@@ -6,15 +6,13 @@ namespace Podcatcher.Models.Database
     /// Interface for a generic model-orientated Database
     /// </summary>
     /// <typeparam name="T">Class that this database can save / retrieve.</typeparam>
-    public interface IDatabase<T>
+    public interface IDatabase
     {
-
-        void Insert(T toInsert);
-
         /// <summary>
-        /// Deletes the passed object from the database.
+        /// Inserts the given <paramref name="values"/> into the given table.
         /// </summary>
-        void Delete(T toDelete);
+        /// <param name="table">Table to insert into. If no table is found with the given name this will throw an Exception. </param>
+        void Insert(string table, ContentValues values);
 
         /// <summary>
         /// Deletes an object by id.
@@ -22,6 +20,6 @@ namespace Podcatcher.Models.Database
         /// <param name="id"></param>
         void Delete(long id);
 
-        List<T> AllRecords();
+        List<ContentValues> AllRecords();
     }
 }
