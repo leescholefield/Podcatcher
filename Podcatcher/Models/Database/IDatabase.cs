@@ -20,6 +20,8 @@ namespace Podcatcher.Models.Database
         /// <param name="id"></param>
         void Delete(long id);
 
-        List<ContentValues> AllRecords();
+        List<ContentValues> AllRecords(string table);
+
+        List<ContentValues> Find(string table, ContentValues values);
     }
 }
