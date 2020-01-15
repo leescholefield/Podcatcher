@@ -84,6 +84,17 @@ namespace Podcatcher.Models.Database
 
         private string CreateInsertStatement(string table, Dictionary<string, object> values)
         {
+            // add single quotes to any values.Value of type string
+            var keys = new List<string>(values.Keys);
+            foreach(string k in keys)
+            {
+                var val = values[k];
+                if (val.GetType() == typeof(string))
+                {
+                    values[k] = "'" + val + "'";
+                }
+            }
+            
             return string.Format("INSERT INTO {0}({1}) values({2})", table,
                 ToCommaSeperatedList(values.Keys), ToCommaSeperatedList(values.Values));
         }
