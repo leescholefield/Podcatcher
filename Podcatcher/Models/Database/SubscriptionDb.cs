@@ -1,15 +1,106 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Podcatcher.Models.Database
 {
     public class SubscriptionDb
     {
+        #region Properties
 
-        public void Subscribe(Podcast podcast) { }
+        private static readonly string TABLE_NAME = "subscriptions";
+        private static readonly DatabaseInfo DbInfo = new DatabaseInfo()
+        {
+            TableNames = new string[] {TABLE_NAME},
+            TableCreationStatements = new string[] {"CREATE TABLE IF NOT EXISTS " + TABLE_NAME + "(id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "feed_url TEXT, title TEXT, author TEXT)"}
+        };
+
+        private IDatabase Database { get; set; }
+
+
+        #endregion
+
+        #region Initilization
+
+        public SubscriptionDb()
+        {
+            Database = DefaultDatabase();
+        }
+
+        public SubscriptionDb(IDatabase database)
+        {
+            Database = database;
+        }
+
+        private IDatabase DefaultDatabase()
+        {
+            return new SqlDatabase("subscriptions", DbInfo);
+        }
+
+        #endregion
+
+        /// <summary>
+        /// Adds <paramref name="podcast"/> to the database.
+        /// </summary>
+        /// <exception cref="NullReferenceException">
+        ///     If <see cref="Podcast.FeedUrl"/> is null.
+        /// </exception>
+        public void Subscribe(Podcast podcast)
+        {
+            var vals = ConvertPodcastPropertiesToDictionary(podcast);
+            Database.Insert(TABLE_NAME, vals);
+        }
+
+        private Dictionary<string, object> ConvertPodcastPropertiesToDictionary(Podcast podcast)
+        {
+            if (podcast.FeedUrl == null)
+            {
+                throw new NullReferenceException("FeedUrl is null");
+            }
+
+            return new Dictionary<string, object>()
+            {
+                {"feed_url", podcast.FeedUrl},
+                {"title", podcast.Title},
+                {"author", podcast.Author}
+            };
+        }
 
         public List<Podcast> GetSubscriptions()
         {
-            return new List<Podcast>();
+            var result = Database.Search(TABLE_NAME, null);
+
+            List<Podcast> pods = new List<Podcast>(result.Count);
+            foreach(var dict in result)
+            {
+                pods.Add(ConvertDictionaryToPodcast(dict));
+            }
+
+            return pods;
+        }
+
+        private Podcast ConvertDictionaryToPodcast(Dictionary<string, object> dict)
+        {
+            return new Podcast
+            {
+                Title = dict["title"].ToString(),
+                Author = dict["author"].ToString(),
+                FeedUrl = dict["feed_url"].ToString()
+            };
+        }
+
+        public void Delete(Podcast toDelete)
+        {
+            // just pass feedUrl since that will also be unique
+            Database.Delete(TABLE_NAME, new Dictionary<string, object>()
+            {
+                {"feed_url", toDelete.FeedUrl}
+            });
+        }
+
+        public void Delete(long id)
+        {
+            Database.Delete(TABLE_NAME, id);
         }
     }
 }
