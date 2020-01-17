@@ -1,6 +1,5 @@
 ﻿using System.IO;
 using System.Net;
-using System.Net.Http;
 using System.Text;
 
 namespace Podcatcher.Models.Net
@@ -11,19 +10,12 @@ namespace Podcatcher.Models.Net
     public class NetworkRequest
     {
 
-        private readonly string Url;
-
-        public NetworkRequest(string url)
-        {
-            Url = url;
-        }
-
         /// <summary>
         /// Sends an HTTP GET request to the url passed to the constructor and then returns the response content as a string.
         /// </summary>
-        public string SendRequest()
+        public string SendRequest(string url)
         {
-            var req = (HttpWebRequest)WebRequest.Create(Url);
+            var req = (HttpWebRequest)WebRequest.Create(url);
             var resp = (HttpWebResponse)req.GetResponse();
             if ( ((int)resp.StatusCode >= 200) && ((int)resp.StatusCode <= 299) )
             {

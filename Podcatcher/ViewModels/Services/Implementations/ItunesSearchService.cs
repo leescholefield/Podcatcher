@@ -10,7 +10,7 @@ namespace Podcatcher.ViewModels.Services
     public class ItunesSearchService : IItunesSearchService
     {
 
-        private NetworkRequest NetRequest;
+        private readonly NetworkRequest NetRequest;
         private readonly IConverter<List<Podcast>> PodcastConverter;
 
         private static readonly string BASE_URL = "https://itunes.apple.com/search?media=podcast&term=";
@@ -26,7 +26,7 @@ namespace Podcatcher.ViewModels.Services
             var url = CreateUrlString(term);
             try
             {
-                var contentBody = new NetworkRequest(url).SendRequest();
+                var contentBody = NetRequest.SendRequest(url);
                 return PodcastConverter.Convert(contentBody);
             }
             catch (WebException e)
