@@ -1,11 +1,7 @@
 ﻿using Podcatcher.Models;
 using Podcatcher.ViewModels.Commands;
 using Podcatcher.ViewModels.Services;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Podcatcher.ViewModels
@@ -16,6 +12,8 @@ namespace Podcatcher.ViewModels
         #region Properties
 
         public ICommand SearchCommand { get; set; }
+
+        public ICommand DisplayPodcastCommand { get; set; }
 
         public string SearchTerm { get; set; }
 
@@ -39,12 +37,18 @@ namespace Podcatcher.ViewModels
         protected override void InitializeCommands()
         {
             SearchCommand = new RelayCommand<string>(SearchCommand_Execute);
+            DisplayPodcastCommand = new RelayCommand<Podcast>(DisplayPodcastCommand_Execute);
         }
 
         private void SearchCommand_Execute(string term)
         {
             var ser = ServiceLocator.Instance.GetService<IItunesSearchService>();
             Results =  ser.Search(term);
+        }
+
+        private void DisplayPodcastCommand_Execute(Podcast podcast)
+        {
+            ServiceLocator.Instance.GetService<INavigationService>().NavigateTo<PodcastViewModel>(podcast);
         }
 
         private bool SearchCommand_CanExecute(string term)
