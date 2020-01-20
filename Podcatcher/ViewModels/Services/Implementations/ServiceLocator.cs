@@ -34,7 +34,7 @@ namespace Podcatcher.ViewModels.Services
                 {typeof(INavigationService), new NavigationService() },
                 {typeof(IRssDeserializer), new RssDeserializer(new PodcastDeserializer())},
                 {typeof(ISubscriptionService), new SubscriptionService(new SubscriptionDb()) },
-                {typeof(IItunesSearchService), new ItunesSearchService(new Models.Net.NetworkRequest(""), new ItunesResultConverter())}
+                {typeof(IItunesSearchService), new ItunesSearchService(new Models.Net.NetworkRequest(), new ItunesResultConverter())}
             };
 
         }
