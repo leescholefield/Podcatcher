@@ -19,5 +19,11 @@
             DataType="{x:Type vm:SearchViewModel}">
             <v:SearchView />
         </DataTemplate>
+
+        <DataTemplate
+            DataType="{x:Type vm:NavbarViewModel}">
+            <v:NavbarView />
+        </DataTemplate>
+        
     </Application.Resources>
 </Application>
