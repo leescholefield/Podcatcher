@@ -1,5 +1,9 @@
 ﻿using Podcatcher.Models;
+using Podcatcher.Models.Database;
+using Podcatcher.Models.Net;
 using Podcatcher.ViewModels.Services;
+using System;
+using System.Collections.Generic;
 
 namespace Podcatcher.ViewModels
 {
@@ -23,36 +27,30 @@ namespace Podcatcher.ViewModels
         public MainViewModel()
         {
             RegisterNavigationCommands();
-
-            // just for testing
-            MainView = new PodcastListViewModel
-            {
-               Podcasts = new System.Collections.Generic.List<Models.Podcast>
-               {
-                   new Models.Podcast
-                   {
-                       Title = "Revolutions",
-                       Author = "Mike Duncan",
-                       ImageUrl = "https://ssl-static.libsyn.com/p/assets/3/4/5/f/345fbd6a253649c0/RevolutionsLogo_V2.jpg"
-                   },
-                   new Models.Podcast
-                   {
-                       Title = "Risky Business",
-                       Author = "Risky.Biz",
-                       ImageUrl = "https://risky.biz/static/img/rbipod2.jpg"
-                   }
-               }
-            };
+            MainView = new SearchViewModel();
         }
 
         private void RegisterNavigationCommands()
         {
             var navService = ServiceLocator.Instance.GetService<INavigationService>();
+
             navService.Register<PodcastViewModel>( (t, args) =>
             {
                 MainView = new PodcastViewModel() { Podcast = (Podcast)args[0] };
                 return true;
             });
+
+            navService.Register<PodcastListViewModel>((t, args) =>
+           {
+               MainView = new PodcastListViewModel() { Podcasts = (List<Podcast>)args[0] };
+               return true;
+           });
+
+            navService.Register<SearchViewModel>((t, args) =>
+           {
+               MainView = new SearchViewModel();
+               return true;
+           });
         }
     }
 }
