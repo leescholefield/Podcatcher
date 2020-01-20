@@ -57,10 +57,14 @@
             <RowDefinition Height="8*" />
         </Grid.RowDefinitions>
 
-        <StackPanel Orientation="Horizontal">
-            <TextBox x:Name="searchTextBox" Text="{Binding SearchTerm}" />
-            <Button Content="S" Command="{Binding SearchCommand}" CommandParameter="{Binding Text, ElementName=searchTextBox}" />
-        </StackPanel>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="8*" />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
+            <TextBox Grid.Column="0" x:Name="searchTextBox" Text="{Binding SearchTerm}" />
+            <Button Grid.Column="1" Content="S" Command="{Binding SearchCommand}" CommandParameter="{Binding Text, ElementName=searchTextBox}" />
+        </Grid>
 
 
         <ListBox Grid.Row="1" ItemsSource="{Binding Results}" ItemContainerStyle="{StaticResource podcastTemplate}" />

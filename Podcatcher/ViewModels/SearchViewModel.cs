@@ -6,6 +6,9 @@ using System.Windows.Input;
 
 namespace Podcatcher.ViewModels
 {
+    /// <summary>
+    /// ViewModel for displaying an Itunes Search query and its response.
+    /// </summary>
     public class SearchViewModel : BaseViewModel
     {
 
@@ -14,8 +17,6 @@ namespace Podcatcher.ViewModels
         public ICommand SearchCommand { get; set; }
 
         public ICommand DisplayPodcastCommand { get; set; }
-
-        public string SearchTerm { get; set; }
 
         private List<Podcast> _results = new List<Podcast>();
         public List<Podcast> Results
@@ -31,12 +32,11 @@ namespace Podcatcher.ViewModels
             }
         }
 
-
         #endregion
 
         protected override void InitializeCommands()
         {
-            SearchCommand = new RelayCommand<string>(SearchCommand_Execute);
+            SearchCommand = new RelayCommand<string>(SearchCommand_Execute, SearchCommand_CanExecute);
             DisplayPodcastCommand = new RelayCommand<Podcast>(DisplayPodcastCommand_Execute);
         }
 
@@ -50,7 +50,8 @@ namespace Podcatcher.ViewModels
         {
             ServiceLocator.Instance.GetService<INavigationService>().NavigateTo<PodcastViewModel>(podcast);
         }
-
+    
+        
         private bool SearchCommand_CanExecute(string term)
         {
             return (term != null && term != "");
