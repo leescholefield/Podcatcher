@@ -24,10 +24,25 @@ namespace Podcatcher.ViewModels
             }
         }
 
+        private BaseViewModel _navBar;
+        public BaseViewModel NavBar
+        {
+            get
+            {
+                return _navBar;
+            }
+            set
+            {
+                _navBar = value;
+                OnPropertyChanged("NavBar");
+            }
+        }
+
         public MainViewModel()
         {
             RegisterNavigationCommands();
-            MainView = new SearchViewModel();
+            MainView = new PodcastListViewModel();
+            NavBar = new NavbarViewModel();
         }
 
         private void RegisterNavigationCommands()

@@ -7,8 +7,13 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="8*" />
+        </Grid.ColumnDefinitions>
 
-        <ContentControl Content="{Binding MainView}" />
+        <ContentControl Grid.Column="0" Content="{Binding NavBar}" />
+        <ContentControl Grid.Column="1" Content="{Binding MainView}" />
 
     </Grid>
 </Window>
