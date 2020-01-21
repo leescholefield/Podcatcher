@@ -16,7 +16,15 @@ namespace Podcatcher.ViewModels.Commands
         private static void Subscribe_Execute(Podcast podcast)
         {
             var ser = ServiceLocator.Instance.GetService<ISubscriptionService>();
-            ser.Subscribe(podcast);
+
+            if (podcast.Subscribed)
+            {
+                ser.Subscribe(podcast);
+            }
+            else
+            {
+                ser.Unsubscribe(podcast);
+            }
         }
     }
 }
