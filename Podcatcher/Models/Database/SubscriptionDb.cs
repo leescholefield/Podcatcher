@@ -12,7 +12,7 @@ namespace Podcatcher.Models.Database
         {
             TableNames = new string[] {TABLE_NAME},
             TableCreationStatements = new string[] {"CREATE TABLE IF NOT EXISTS " + TABLE_NAME + "(id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "feed_url TEXT, title TEXT, author TEXT)"}
+                "feed_url TEXT UNIQUE, title TEXT, author TEXT)"}
         };
 
         private IDatabase Database { get; set; }

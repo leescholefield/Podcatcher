@@ -114,6 +114,7 @@ namespace Podcatcher.Models.Database
         /// <returns>A List containing a Dictionary of every result found. If no results were found this will be an empty list.</returns>
         public List<Dictionary<string, object>> Search(string table, Dictionary<string, object> values)
         {
+            CreateTables();
             var result = new List<Dictionary<string, object>>();
             using (var conn = new SQLiteConnection(_connString))
             using (var comm = conn.CreateCommand())
@@ -149,6 +150,7 @@ namespace Podcatcher.Models.Database
 
         public Dictionary<string, object> Search(string table, long id)
         {
+            CreateTables();
             Dictionary<string, object> result = null;
             using (var conn = new SQLiteConnection(_connString))
             using (var comm = conn.CreateCommand())
@@ -176,6 +178,7 @@ namespace Podcatcher.Models.Database
 
         public void Delete(string table, long id)
         {
+            CreateTables();
             using (var conn = new SQLiteConnection(_connString))
             using (var comm = conn.CreateCommand())
             {
@@ -187,6 +190,7 @@ namespace Podcatcher.Models.Database
 
         public void Delete(string table, Dictionary<string, object> values)
         {
+            CreateTables();
             using (var conn = new SQLiteConnection(_connString))
             using (var comm = conn.CreateCommand())
             {
