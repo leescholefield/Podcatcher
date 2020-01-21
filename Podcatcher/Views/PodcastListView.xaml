@@ -46,15 +46,21 @@
                                             Binding="{Binding Path=Subscribed}"
                                             Value="true">
                                                 <Setter
-                                                Property="Template"
-                                                Value="{StaticResource FavIcon_Filled}" />
+                                                    Property="Template"
+                                                    Value="{StaticResource FavIcon_Filled}" />
+                                                <Setter
+                                                    Property="ToolTip"
+                                                    Value="Unsubscribe" />
                                             </DataTrigger>
                                             <DataTrigger
                                             Binding="{Binding Path=Subscribed}"
                                             Value="false">
                                                 <Setter
-                                                Property="Template"
-                                                Value="{StaticResource FavIcon_Outline}" />
+                                                    Property="Template"
+                                                    Value="{StaticResource FavIcon_Outline}" />
+                                                <Setter
+                                                    Property="ToolTip"
+                                                    Value="Subscribe" />
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
