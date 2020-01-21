@@ -23,7 +23,9 @@
                                 <!-- Image -->
                                 <ColumnDefinition Width="2*" />
                                 <!-- Details -->
-                                <ColumnDefinition Width="8*" />
+                                <ColumnDefinition Width="7*" />
+                                <!--Subscibe-->
+                                <ColumnDefinition Width="1*" />
                             </Grid.ColumnDefinitions>
 
                             <Rectangle Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Grid.ColumnSpan="2" Fill="Transparent" Stroke="LightGray" StrokeThickness="1"/>
@@ -34,6 +36,9 @@
                             <Label Grid.Row="0" Grid.Column="1" Content="{Binding Title}" />
                             <Label Grid.Row="1" Grid.Column="1" Content="{Binding Author}" />
                             <Label Grid.Row="2" Grid.Column="1" Content="{Binding Description}" />
+
+                            <Button Grid.Row="0" Grid.Column="2" Grid.RowSpan="10" Content="S" Command="{Binding RelativeSource={RelativeSource FindAncestor, 
+                                AncestorType={x:Type UserControl}}, Path=DataContext.SubscribeToPodcast}" CommandParameter="{Binding}"/>
 
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="MouseLeftButtonUp">
@@ -53,9 +58,9 @@
 
         <Grid.RowDefinitions>
             <!-- Heading row-->
-            <RowDefinition Height="2*" />
+            <RowDefinition Height="1*" />
             <!-- ListBox row -->
-            <RowDefinition Height="8*" />
+            <RowDefinition Height="25*" />
         </Grid.RowDefinitions>
 
         <!-- Heading title -->
