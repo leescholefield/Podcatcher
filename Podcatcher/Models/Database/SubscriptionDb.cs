@@ -12,7 +12,7 @@ namespace Podcatcher.Models.Database
         {
             TableNames = new string[] {TABLE_NAME},
             TableCreationStatements = new string[] {"CREATE TABLE IF NOT EXISTS " + TABLE_NAME + "(id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "feed_url TEXT UNIQUE, title TEXT, author TEXT)"}
+                "feed_url TEXT UNIQUE, title TEXT, author TEXT, image_url TEXT)"}
         };
 
         private IDatabase Database { get; set; }
@@ -62,7 +62,8 @@ namespace Podcatcher.Models.Database
             {
                 {"feed_url", podcast.FeedUrl},
                 {"title", podcast.Title},
-                {"author", podcast.Author}
+                {"author", podcast.Author},
+                {"image_url", podcast.ImageUrl}
             };
         }
 
@@ -86,6 +87,7 @@ namespace Podcatcher.Models.Database
                 Title = dict["title"].ToString(),
                 Author = dict["author"].ToString(),
                 FeedUrl = dict["feed_url"].ToString(),
+                ImageUrl = dict["image_url"].ToString(),
                 Subscribed = true
             };
         }
