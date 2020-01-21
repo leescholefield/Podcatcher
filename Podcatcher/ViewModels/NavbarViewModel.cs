@@ -39,6 +39,11 @@ namespace Podcatcher.ViewModels
                 {
                     DisplayName = "Search",
                     ViewModel = new SearchViewModel()
+                },
+                new MenuItem
+                {
+                    DisplayName = "Subscriptions",
+                    ViewModel = new PodcastListViewModel()
                 }
             };
         }
@@ -52,6 +57,14 @@ namespace Podcatcher.ViewModels
 
         private void NavigateToViewModel_Execute(MenuItem item)
         {
+            // PodcastListView expects its Podcast list to be already loaded so we need to pass it to the service locator.
+            // FIX THIS: might be better to have a special case in the MainViewModel handling of nav service requests.
+            if (item.ViewModel.GetType() == typeof(PodcastListViewModel))
+            {
+                var pods = ServiceLocator.Instance.GetService<ISubscriptionService>().GetSubscriptions();
+                NavService.NavigateTo(item.ViewModel, pods);
+                return;
+            }
             NavService.NavigateTo(item.ViewModel, item.OptionalParams);
         }
 
