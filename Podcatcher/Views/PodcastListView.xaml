@@ -37,8 +37,29 @@
                             <Label Grid.Row="1" Grid.Column="1" Content="{Binding Author}" />
                             <Label Grid.Row="2" Grid.Column="1" Content="{Binding Description}" />
 
-                            <Button Grid.Row="0" Grid.Column="2" Grid.RowSpan="10" Content="S" Command="{Binding RelativeSource={RelativeSource FindAncestor, 
-                                AncestorType={x:Type UserControl}}, Path=DataContext.SubscribeToPodcast}" CommandParameter="{Binding}"/>
+                            <Button Grid.Row="0" Grid.Column="2" Grid.RowSpan="10"  Command="{Binding RelativeSource={RelativeSource FindAncestor, 
+                                AncestorType={x:Type UserControl}}, Path=DataContext.SubscribeToPodcast}" CommandParameter="{Binding}">
+                                <Button.Style>
+                                    <Style TargetType="Button">
+                                        <Style.Triggers>
+                                            <DataTrigger
+                                            Binding="{Binding Path=Subscribed}"
+                                            Value="true">
+                                                <Setter
+                                                Property="Template"
+                                                Value="{StaticResource FavIcon_Filled}" />
+                                            </DataTrigger>
+                                            <DataTrigger
+                                            Binding="{Binding Path=Subscribed}"
+                                            Value="false">
+                                                <Setter
+                                                Property="Template"
+                                                Value="{StaticResource FavIcon_Outline}" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
 
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="MouseLeftButtonUp">
