@@ -85,7 +85,8 @@ namespace Podcatcher.Models.Database
             {
                 Title = dict["title"].ToString(),
                 Author = dict["author"].ToString(),
-                FeedUrl = dict["feed_url"].ToString()
+                FeedUrl = dict["feed_url"].ToString(),
+                Subscribed = true
             };
         }
 
