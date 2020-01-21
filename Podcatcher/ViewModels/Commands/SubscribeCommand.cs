@@ -9,21 +9,25 @@ namespace Podcatcher.ViewModels.Commands
 
         private static Action<Podcast> Action => Subscribe_Execute;
 
-        public SubscribeCommand() : base(Action)
+        private static ISubscriptionService Service;
+
+        public SubscribeCommand() : this(ServiceLocator.Instance.GetService<ISubscriptionService>()) { }
+
+        public SubscribeCommand(ISubscriptionService service) : base(Action)
         {
+            Service = service;
         }
 
         private static void Subscribe_Execute(Podcast podcast)
         {
-            var ser = ServiceLocator.Instance.GetService<ISubscriptionService>();
-
+            // unsubscibe if already subscribed
             if (podcast.Subscribed)
             {
-                ser.Subscribe(podcast);
+                Service.Unsubscribe(podcast);
             }
             else
             {
-                ser.Unsubscribe(podcast);
+                Service.Subscribe(podcast);
             }
         }
     }
