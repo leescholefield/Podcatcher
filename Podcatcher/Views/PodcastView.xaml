@@ -47,55 +47,24 @@
             <RowDefinition Height="6*" />
         </Grid.RowDefinitions>
 
-        <!-- Header -->
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <!-- Image -->
                 <ColumnDefinition Width="2*" />
-                <!-- Pod details -->
                 <ColumnDefinition Width="8*" />
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
                 <RowDefinition Height="9*" />
-                <RowDefinition Height="2*" />
             </Grid.RowDefinitions>
 
-            <Image Grid.Column="0" Grid.Row="0" Grid.RowSpan="10" Source="{Binding Podcast.ImageUrl}" Stretch="Uniform"/>
-
-            <Viewbox Grid.Column="1" Grid.Row="0" Stretch="Fill" >
+            <Image Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Source="{Binding Podcast.ImageUrl}" Stretch="Uniform"/>
+            <Button Grid.Row="0" Grid.Column="1"
+                    Content="Subscribe" HorizontalAlignment="Right"
+                    Command="{Binding SubscribeCommand}" CommandParameter="{Binding Podcast}" />
+            <Viewbox Grid.Column="1" Grid.Row="1" Stretch="Fill" >
                 <Label  Content="{Binding Podcast.Title}" FontFamily="Corbel"/>
             </Viewbox>
-            <Button Grid.Row="1" Grid.Column="1" Width="30" Height="30"
-                    HorizontalAlignment="Right"
-                    Command="{Binding SubscribeCommand}" CommandParameter="{Binding Podcast}">
-                <Button.Style>
-                    <Style TargetType="Button">
-                        <Style.Triggers>
-                            <DataTrigger
-                                            Binding="{Binding Path=Podcast.Subscribed}"
-                                            Value="true">
-                                <Setter
-                                                    Property="Template"
-                                                    Value="{StaticResource FavIcon_Filled}" />
-                                <Setter
-                                                    Property="ToolTip"
-                                                    Value="Unsubscribe" />
-                            </DataTrigger>
-                            <DataTrigger
-                                            Binding="{Binding Path=Podcast.Subscribed}"
-                                            Value="false">
-                                <Setter
-                                                    Property="Template"
-                                                    Value="{StaticResource FavIcon_Outline}" />
-                                <Setter
-                                                    Property="ToolTip"
-                                                    Value="Subscribe" />
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
-            </Button>
         </Grid>
 
         <ListBox Grid.Row="1" ItemsSource="{Binding Podcast.Episodes}" ItemContainerStyle="{StaticResource episodeTemplate}" />
