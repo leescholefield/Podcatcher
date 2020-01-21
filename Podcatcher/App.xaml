@@ -5,25 +5,33 @@
              xmlns:vm="clr-namespace:Podcatcher.ViewModels"
              xmlns:v="clr-namespace:Podcatcher.Views"
              StartupUri="MainWindow.xaml">
-    <Application.Resources>
-        <DataTemplate
-             DataType="{x:Type vm:PodcastViewModel}">
-            <v:PodcastView />
-        </DataTemplate>
-        <DataTemplate
-            DataType="{x:Type vm:PodcastListViewModel}">
-            <v:PodcastListView />
-        </DataTemplate>
+    <Application.Resources>    
+        <ResourceDictionary>
+            <DataTemplate
+                 DataType="{x:Type vm:PodcastViewModel}">
+                <v:PodcastView />
+            </DataTemplate>
+            <DataTemplate
+                DataType="{x:Type vm:PodcastListViewModel}">
+                <v:PodcastListView />
+            </DataTemplate>
 
-        <DataTemplate
-            DataType="{x:Type vm:SearchViewModel}">
-            <v:SearchView />
-        </DataTemplate>
+            <DataTemplate
+                DataType="{x:Type vm:SearchViewModel}">
+                <v:SearchView />
+            </DataTemplate>
 
-        <DataTemplate
-            DataType="{x:Type vm:NavbarViewModel}">
-            <v:NavbarView />
-        </DataTemplate>
-        
+            <DataTemplate
+                DataType="{x:Type vm:NavbarViewModel}">
+                <v:NavbarView />
+            </DataTemplate>
+
+
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary x:Name="IconsDictionary" 
+                                    Source="Views\Icons.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+     </ResourceDictionary>
     </Application.Resources>
 </Application>
