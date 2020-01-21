@@ -15,6 +15,11 @@ namespace Podcatcher.ViewModels.Services
         void Subscribe(Podcast podcast);
 
         /// <summary>
+        /// Removes <paramref name="podcast"/> from the user's subscriptions. If it is not saved in the subscriptions this will do nothing.
+        /// </summary>
+        void Unsubscribe(Podcast podcast);
+
+        /// <summary>
         /// Returns a list of the user's subscribed <see cref="Podcast"/>s. If there is no subribed podcasts this will return an empty list.
         /// </summary>
         /// <returns></returns>

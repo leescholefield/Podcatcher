@@ -22,5 +22,10 @@ namespace Podcatcher.ViewModels.Services
         {
             Db.Subscribe(podcast);
         }
+
+        public void Unsubscribe(Podcast podcast)
+        {
+            Db.Delete(podcast);
+        }
     }
 }
