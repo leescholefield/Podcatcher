@@ -1,12 +1,27 @@
-﻿Feed deserialization:
-	-- XmlConverter / itunes result converter
-		-- clean code
+﻿Core:
+	SqlDatabase:
+		-- need better way to add quote marks around strings.
+			Look for a way to input them as replacements for '?' in an insert query.
+	Search:
+		-- ItunesResultConverter -- will it throw exception if parsed json has elements missing?
+			-- should return empty list?
 
 UI:
+	PodcastListView:
+		-- Icon_Outline not sending clicks to button on the transparent inside of it
 	ViewModels:
-		-- PodcastViewModel - display single podcast
-		-- PodcastList - display list of podcasts
-		-- Search - search for a podcast (via itunes)
+		-- Seperate style used to display a podcast into a seperate file so it can be re-used by different views.
+		 Currently copy-pasted in PodcastListView and SearchView
+		-- Search
+			-- pretty it up
+				-- change button to search icon
+				-
+	NavBarViewModel:
+		-- currently pass subsciption list to the navservice as optional params. The NavBar should not be responsible for this. Should 
+		ideally be handled by the function registered with the NavService.
+
+Services:
+
 
 MediaPlayback
 	-- play /pause

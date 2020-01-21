@@ -1,8 +1,5 @@
 ﻿using Podcatcher.Models;
-using Podcatcher.Models.Database;
-using Podcatcher.Models.Net;
 using Podcatcher.ViewModels.Services;
-using System;
 using System.Collections.Generic;
 
 namespace Podcatcher.ViewModels
@@ -41,7 +38,19 @@ namespace Podcatcher.ViewModels
         public MainViewModel()
         {
             RegisterNavigationCommands();
-            MainView = new PodcastListViewModel();
+            MainView = new PodcastListViewModel()
+            {
+                Podcasts = new List<Podcast>
+                {
+                    new Podcast
+                    {
+                        Title = "Revolutions", 
+                        Author = "Mike Duncan",
+                        ImageUrl = "http://static.libsyn.com/p/assets/3/4/5/f/345fbd6a253649c0/RevolutionsLogo_V2.jpg",
+                        FeedUrl = "http://revolutionspodcast.libsyn.com/rss/"
+                    }
+                }
+            };
             NavBar = new NavbarViewModel();
         }
 
