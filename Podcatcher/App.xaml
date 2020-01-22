@@ -26,6 +26,11 @@
                 <v:NavbarView />
             </DataTemplate>
 
+            <DataTemplate
+                DataType="{x:Type vm:PlayerBarViewModel}">
+                <v:PlayerBar />
+            </DataTemplate>
+
 
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary x:Name="IconsDictionary" 
