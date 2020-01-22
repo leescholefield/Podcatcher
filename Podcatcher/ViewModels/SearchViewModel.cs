@@ -32,6 +32,21 @@ namespace Podcatcher.ViewModels
             }
         }
 
+        private bool _displayNoResultsFoundMessage = false;
+        public bool DisplayNoResultsFoundMessage
+        {
+            get
+            {
+                return _displayNoResultsFoundMessage;
+            }
+            set
+            {
+                _displayNoResultsFoundMessage = value;
+                OnPropertyChanged("DisplayNoResultsFoundMessage");
+            }
+        }
+
+
         #endregion
 
         protected override void InitializeCommands()
@@ -44,6 +59,11 @@ namespace Podcatcher.ViewModels
         {
             var ser = ServiceLocator.Instance.GetService<IItunesSearchService>();
             Results =  ser.Search(term);
+
+            if (Results.Count == 0)
+                DisplayNoResultsFoundMessage = true;
+            else
+                DisplayNoResultsFoundMessage = false;
         }
 
         private void DisplayPodcastCommand_Execute(Podcast podcast)

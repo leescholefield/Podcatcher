@@ -66,8 +66,30 @@
             <Button Grid.Column="1" Content="S" Command="{Binding SearchCommand}" CommandParameter="{Binding Text, ElementName=searchTextBox}" />
         </Grid>
 
+        <Label Grid.Row="1" Content="No results found" Visibility="Visible" />
 
-        <ListBox Grid.Row="1" ItemsSource="{Binding Results}" ItemContainerStyle="{StaticResource podcastTemplate}" />
+        <ListBox Grid.Row="1" x:Name="resultListBox" ItemsSource="{Binding Results}" ItemContainerStyle="{StaticResource podcastTemplate}">
+            <ListBox.Style>
+                <Style TargetType="ListBox">
+                    <Style.Triggers>
+                        <DataTrigger
+                            Binding="{Binding DisplayNoResultsFoundMessage}"
+                            Value="true">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                        </DataTrigger>
+                        <DataTrigger
+                            Binding="{Binding DisplayNoResultsFoundMessage}"
+                            Value="false">
+                            <Setter Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ListBox.Style>
+        </ListBox>
+
+
+
+
 
 
     </Grid>
