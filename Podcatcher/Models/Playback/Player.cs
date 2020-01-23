@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Media;
 
 namespace Podcatcher.Models.Playback
@@ -16,11 +12,17 @@ namespace Podcatcher.Models.Playback
 
         private MediaItem CurrentlyPlaying;
 
+        public event EventHandler<PlayerStateChangedEventArgs> PlaybackStarted;
+        public event EventHandler<PlayerStateChangedEventArgs> PlaybackPaused;
+        public event EventHandler<PlayerStateChangedEventArgs> PlaybackStopped;
+        public event EventHandler<PlayerStateChangedEventArgs> PlaybackPositionUpdated;
+
         #endregion
 
         #region Instantiation
 
         private static Player _instance;
+
         public static Player Instance {
             get
             {
@@ -49,6 +51,8 @@ namespace Podcatcher.Models.Playback
             if (item.Episode.StreamUrl == null || item.Episode.StreamUrl == "")
                 throw new ArgumentException("MediaItem Episode does not have a StreamUrl set");
 
+            CurrentlyPlaying = item;
+
             Uri uri = new Uri(item.Episode.StreamUrl);
             MediaPlayer = new MediaPlayer();
             MediaPlayer.Open(uri);
@@ -61,6 +65,7 @@ namespace Podcatcher.Models.Playback
 
             if (MediaPlayer.CanPause)
                 MediaPlayer.Pause();
+            PlaybackPaused?.Invoke(this, new PlayerStateChangedEventArgs(PlayerState.Paused));
         }
 
         public void Play()
@@ -69,6 +74,7 @@ namespace Podcatcher.Models.Playback
                 throw new InvalidOperationException("Must call Load on the MediaPlayer before attempting to play");
 
             MediaPlayer.Play();
+            PlaybackStarted?.Invoke(this, new PlayerStateChangedEventArgs(PlayerState.Playing));
         }
 
         public void SkipBack(int seconds)
@@ -78,6 +84,7 @@ namespace Podcatcher.Models.Playback
 
             var newPos = MediaPlayer.Position.Add(new TimeSpan(0, 0, 0, seconds, 0));
             MediaPlayer.Position = newPos;
+            PlaybackPositionUpdated?.Invoke(this, new PlayerStateChangedEventArgs(PlayerState.Playing, newPos));
         }
 
         public void SkipForward(int seconds)
@@ -86,6 +93,7 @@ namespace Podcatcher.Models.Playback
                 throw new InvalidOperationException("Must call Load on the MediaPlayer before attempting to skip");
 
             var newPos = MediaPlayer.Position.Subtract(new TimeSpan(0, 0, 0, seconds, 0));
+            PlaybackPositionUpdated?.Invoke(this, new PlayerStateChangedEventArgs(PlayerState.Playing, newPos));
             MediaPlayer.Position = newPos;
         }
 
@@ -96,6 +104,7 @@ namespace Podcatcher.Models.Playback
 
             MediaPlayer.Stop();
             MediaPlayer.Close();
+            PlaybackStarted?.Invoke(this, new PlayerStateChangedEventArgs(PlayerState.Stopped_On_Request));
         }
 
         #endregion
