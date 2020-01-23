@@ -19,4 +19,23 @@
             </Canvas>
         </Viewbox>
     </ControlTemplate>
+
+    <ControlTemplate x:Key="PlayIcon">
+        <Viewbox Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ActualWidth}"
+                 Height="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ActualHeight}">
+            <Canvas Width="24" Height="24">
+                <Path Fill="Black" Data="M8,5.14V19.14L19,12.14L8,5.14Z" />
+            </Canvas>
+        </Viewbox>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="PauseIcon">
+        <Viewbox Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ActualWidth}"
+                 Height="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ActualHeight}">
+            <Canvas Width="24" Height="24">
+                <Path Fill="Black" Data="M14,19H18V5H14M6,19H10V5H6V19Z" />
+            </Canvas>
+        </Viewbox>
+    </ControlTemplate>
+    
 </ResourceDictionary>
