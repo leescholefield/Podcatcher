@@ -1,14 +1,75 @@
-﻿namespace Podcatcher.Models
+﻿using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+namespace Podcatcher.Models
 {
-    public class Episode
+    public class Episode : INotifyPropertyChanged
     {
 
-        public string Title { get; set; }
+        private string titleValue = string.Empty;
+        private string authorValue = string.Empty;
+        private string streamUrlValue = string.Empty;
+        private string descriptionValue = string.Empty;
 
-        public string Author { get; set; }
+        public event PropertyChangedEventHandler PropertyChanged;
 
-        public string StreamUrl { get; set; }
+        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
-        public string Description { get; set; }
+        public string Title
+        {
+            get
+            {
+                return titleValue;
+            }
+            set
+            {
+                titleValue = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public string Author
+        {
+            get
+            {
+                return authorValue;
+            }
+            set
+            {
+                authorValue = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public string StreamUrl
+        {
+            get
+            {
+                return streamUrlValue;
+            }
+            set
+            {
+                streamUrlValue = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public string Description
+        {
+            get
+            {
+                return descriptionValue;
+            }
+            set
+            {
+                descriptionValue = value;
+                NotifyPropertyChanged();
+            }
+        }
+
     }
 }
