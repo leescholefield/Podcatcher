@@ -51,6 +51,12 @@ namespace Podcatcher.Models.Playback
             if (item.Episode.StreamUrl == null || item.Episode.StreamUrl == "")
                 throw new ArgumentException("MediaItem Episode does not have a StreamUrl set");
 
+            // might not be neccessary in all cases but since MediaPlayer makes it difficult to detect if an item is playing may as well
+            if (MediaPlayer != null)
+            {
+                MediaPlayer.Close();
+            }
+
             CurrentlyPlaying = item;
 
             Uri uri = new Uri(item.Episode.StreamUrl);
