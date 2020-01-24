@@ -9,35 +9,61 @@
     <Grid>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="3*" />
-            <ColumnDefinition Width="3*" />
-            <ColumnDefinition Width="3*" />
+            <ColumnDefinition Width="4*" />
+            <ColumnDefinition Width="6*" />
         </Grid.ColumnDefinitions>
+        
+        <!-- Now playing details -->
+        <Grid Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*" />
+                <ColumnDefinition Width="6*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+            
+            <Image Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" 
+                                    Stretch="Uniform"/>
 
-        <Button Grid.Column="0" Command="{Binding SkipBack}" Template="{StaticResource RewindIcon_10}" ToolTip="Rewind" />
+            <Label Grid.Column="1" Grid.Row="0" Content="{Binding Playing.Episode.Title}" />
+            <Label Grid.Column="1" Grid.Row="1" Content="{Binding Playing.Episode.Author}" />
 
-        <Button Grid.Column="1" Command="{Binding TogglePlayback}">
-            <Button.Style>
-                <Style TargetType="Button">
-                    <Style.Triggers>
-                        <DataTrigger
+        </Grid>
+        
+        <!-- Player buttons -->
+        <Grid Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="3*" />
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0" Command="{Binding SkipBack}" Template="{StaticResource RewindIcon_10}" ToolTip="Rewind" />
+
+            <Button Grid.Column="1" Command="{Binding TogglePlayback}">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Style.Triggers>
+                            <DataTrigger
                              Binding="{Binding Path=IsPlaying}"
                              Value="true">
-                            <Setter Property="Template" Value="{StaticResource PauseIcon}" />
-                            <Setter Property="ToolTip" Value="Pause" />
-                        </DataTrigger>
-                        <DataTrigger
+                                <Setter Property="Template" Value="{StaticResource PauseIcon}" />
+                                <Setter Property="ToolTip" Value="Pause" />
+                            </DataTrigger>
+                            <DataTrigger
                              Binding="{Binding Path=IsPlaying}"
                              Value="false">
-                            <Setter Property="Template" Value="{StaticResource PlayIcon}" />
-                            <Setter Property="ToolTip" Value="Play" />
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </Button.Style>
-        </Button>
+                                <Setter Property="Template" Value="{StaticResource PlayIcon}" />
+                                <Setter Property="ToolTip" Value="Play" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
 
-        <Button Grid.Column="2" Command="{Binding SkipForward}" Template="{StaticResource ForwardIcon_10}" ToolTip="Forward" />
-
+            <Button Grid.Column="2" Command="{Binding SkipForward}" Template="{StaticResource ForwardIcon_10}" ToolTip="Forward" />
+        </Grid>
     </Grid>
 </UserControl>
