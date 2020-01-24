@@ -7,6 +7,8 @@ namespace Podcatcher.ViewModels
     public class MainViewModel : BaseViewModel
     {
 
+        #region Properties
+
         private BaseViewModel _mainView;
         public BaseViewModel MainView
         {
@@ -35,6 +37,22 @@ namespace Podcatcher.ViewModels
             }
         }
 
+        private BaseViewModel _playBar;
+        public BaseViewModel PlayBar
+        {
+            get
+            {
+                return _playBar;
+            }
+            set
+            {
+                _playBar = value;
+                OnPropertyChanged("PlayBar");
+            }
+        }
+
+        #endregion
+
         public MainViewModel()
         {
             RegisterNavigationCommands();
@@ -51,6 +69,7 @@ namespace Podcatcher.ViewModels
                     }
                 }
             };
+            PlayBar = new PlayerBarViewModel();
             NavBar = new NavbarViewModel();
         }
 

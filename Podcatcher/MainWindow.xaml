@@ -11,9 +11,15 @@
             <ColumnDefinition Width="2*" />
             <ColumnDefinition Width="8*" />
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="8*" />
+            <RowDefinition Height="2*" />
+        </Grid.RowDefinitions>
 
-        <ContentControl Grid.Column="0" Content="{Binding NavBar}" />
-        <ContentControl Grid.Column="1" Content="{Binding MainView}" />
+        <ContentControl Grid.Column="0" Grid.Row="0" Content="{Binding NavBar}" />
+        <ContentControl Grid.Column="1" Grid.Row="0" Content="{Binding MainView}" />
+
+        <ContentControl Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Content="{Binding PlayBar}" />
 
     </Grid>
 </Window>
