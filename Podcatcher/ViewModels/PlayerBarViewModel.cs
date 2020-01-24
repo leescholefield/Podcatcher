@@ -1,5 +1,6 @@
 ﻿using Podcatcher.Models.Playback;
 using Podcatcher.ViewModels.Commands;
+using Podcatcher.ViewModels.Services;
 using System.Windows.Input;
 
 namespace Podcatcher.ViewModels
@@ -7,7 +8,9 @@ namespace Podcatcher.ViewModels
     public class PlayerBarViewModel : BaseViewModel
     {
 
-        private IPlayer MediaPlayer;
+        #region Properties
+
+        private IPlaybackService PlaybackService { get; set; }
 
         private MediaItem _playing;
         public MediaItem Playing
@@ -45,22 +48,21 @@ namespace Podcatcher.ViewModels
 
         public ICommand SkipBack { get; set; }
 
-        public PlayerBarViewModel()
-        {
-            MediaPlayer = Player.Instance;
-            // testing
-            var item = new MediaItem
-            {
-                Episode = new Models.Episode
-                {
-                    StreamUrl = "http://traffic.libsyn.com/revolutionspodcast/10.26-_The_Far_East_Master.mp3?dest-id=159998",
-                    Title = "10.26 - The Far East Master",
-                    Author = "Mike Duncan"
-                }
-            };
-            MediaPlayer.Load(item);
-            Playing = item;
+        #endregion
 
+        #region Instantiation
+
+        public PlayerBarViewModel() : this(ServiceLocator.Instance.GetService<IPlaybackService>())
+        {
+        }
+
+        public PlayerBarViewModel(IPlaybackService playbackService)
+        {
+            PlaybackService = playbackService;
+            PlaybackService.NowPlayingChanged += (s, a) =>
+            {
+                Playing = a.MediaItem;
+            };
             RegisterMediaPlayerEvents();
         }
 
@@ -73,36 +75,38 @@ namespace Podcatcher.ViewModels
 
         private void RegisterMediaPlayerEvents()
         {
-            MediaPlayer.PlaybackStarted += (s, a) =>
+            PlaybackService.Player.PlaybackStarted += (s, a) =>
             {
                 IsPlaying = true;
             };
-            MediaPlayer.PlaybackPaused += (s, a) =>
+            PlaybackService.Player.PlaybackPaused += (s, a) =>
             {
                 IsPlaying = false;
             };
-            MediaPlayer.PlaybackStopped += (s, a) =>
+            PlaybackService.Player.PlaybackStopped += (s, a) =>
             {
                 IsPlaying = false;
             };
         }
+
+        #endregion
 
         private void TogglePlayback_Execute(object _)
         {
             if (IsPlaying)
-                MediaPlayer.Pause();
+                PlaybackService.Pause();
             else
-                MediaPlayer.Play();
+                PlaybackService.Play();
         }
 
         private void SkipForward_Execute(object _)
         {
-            MediaPlayer.SkipForward(SKIP_DURATION_SECONDS);
+            PlaybackService.SkipForward(SKIP_DURATION_SECONDS);
         }
 
         private void SkipBack_Execute(object _)
         {
-            MediaPlayer.SkipBack(SKIP_DURATION_SECONDS);
+            PlaybackService.SkipBack(SKIP_DURATION_SECONDS);
         }
     }
 }

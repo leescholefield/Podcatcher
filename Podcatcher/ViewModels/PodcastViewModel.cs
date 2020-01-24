@@ -49,7 +49,8 @@ namespace Podcatcher.ViewModels
 
         private void PlayCommand_Execute(Episode episode)
         {
-
+            var service = ServiceLocator.Instance.GetService<IPlaybackService>();
+            service.Load(episode);
         }
 
         private void DeserializeEpisodes()
