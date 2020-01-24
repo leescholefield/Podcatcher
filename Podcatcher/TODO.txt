@@ -10,9 +10,6 @@ UI:
 	ViewModels:
 		-- Seperate style used to display a podcast into a seperate file so it can be re-used by different views.
 		 Currently copy-pasted in PodcastListView and SearchView
-		-- Search
-			-- pretty it up
-				-- change button to search icon
 
 	NavBarViewModel:
 		-- currently pass subsciption list to the navservice as optional params. The NavBar should not be responsible for this. Should 
