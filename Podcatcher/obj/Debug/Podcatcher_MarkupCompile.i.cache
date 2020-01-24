@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\leesc\source\repos\Podcatcher\Podcatcher\App.xaml
-61665971499
+71969972802
 21760801905
-421381554230
+491963990074
 129-62649109
-MainWindow.xaml;Views\Icons.xaml;Views\NavbarView.xaml;Views\PodcastListView.xaml;Views\PodcastView.xaml;Views\SearchView.xaml;
+MainWindow.xaml;Views\Icons.xaml;Views\NavbarView.xaml;Views\PlayerBar.xaml;Views\PodcastListView.xaml;Views\PodcastView.xaml;Views\SearchView.xaml;
 
-True
+False
 

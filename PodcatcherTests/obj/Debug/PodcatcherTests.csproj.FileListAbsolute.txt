@@ -1,5 +1,3 @@
-C:\Users\leesc\source\repos\Podcatcher\PodcatcherTests\obj\Debug\PodcatcherTests.csprojAssemblyReference.cache
-C:\Users\leesc\source\repos\Podcatcher\PodcatcherTests\obj\Debug\PodcatcherTests.csproj.CoreCompileInputs.cache
 C:\Users\leesc\source\repos\Podcatcher\PodcatcherTests\bin\Debug\x86\sqlite3.dll
 C:\Users\leesc\source\repos\Podcatcher\PodcatcherTests\bin\Debug\x64\sqlite3.dll
 C:\Users\leesc\source\repos\Podcatcher\PodcatcherTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
@@ -37,6 +35,8 @@ C:\Users\leesc\source\repos\Podcatcher\PodcatcherTests\bin\Debug\System.Numerics
 C:\Users\leesc\source\repos\Podcatcher\PodcatcherTests\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\leesc\source\repos\Podcatcher\PodcatcherTests\bin\Debug\System.Threading.Tasks.Extensions.xml
 C:\Users\leesc\source\repos\Podcatcher\PodcatcherTests\bin\Debug\Newtonsoft.Json.xml
+C:\Users\leesc\source\repos\Podcatcher\PodcatcherTests\obj\Debug\PodcatcherTests.csprojAssemblyReference.cache
+C:\Users\leesc\source\repos\Podcatcher\PodcatcherTests\obj\Debug\PodcatcherTests.csproj.CoreCompileInputs.cache
 C:\Users\leesc\source\repos\Podcatcher\PodcatcherTests\obj\Debug\PodcatcherTests.csproj.CopyComplete
 C:\Users\leesc\source\repos\Podcatcher\PodcatcherTests\obj\Debug\PodcatcherTests.dll
 C:\Users\leesc\source\repos\Podcatcher\PodcatcherTests\obj\Debug\PodcatcherTests.pdb

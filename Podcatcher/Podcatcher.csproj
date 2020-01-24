@@ -95,18 +95,24 @@
     <Compile Include="Models\Database\SqlDatabase.cs" />
     <Compile Include="Models\Database\SubscriptionDb.cs" />
     <Compile Include="Models\Net\NetworkRequest.cs" />
+    <Compile Include="Models\Playback\IPlayer.cs" />
+    <Compile Include="Models\Playback\MediaItem.cs" />
+    <Compile Include="Models\Playback\Player.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\Commands\RelayCommand.cs" />
     <Compile Include="ViewModels\Commands\SubscribeCommand.cs" />
     <Compile Include="ViewModels\Commands\ViewSubscriptionsCommand.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\NavbarViewModel.cs" />
+    <Compile Include="ViewModels\PlayerBarViewModel.cs" />
     <Compile Include="ViewModels\PodcastListViewModel.cs" />
     <Compile Include="ViewModels\PodcastViewModel.cs" />
     <Compile Include="ViewModels\SearchViewModel.cs" />
     <Compile Include="ViewModels\Services\IItunesSearchService.cs" />
     <Compile Include="ViewModels\Services\Implementations\ItunesSearchService.cs" />
+    <Compile Include="ViewModels\Services\Implementations\PlaybackService.cs" />
     <Compile Include="ViewModels\Services\INavigationService.cs" />
+    <Compile Include="ViewModels\Services\IPlaybackService.cs" />
     <Compile Include="ViewModels\Services\IRssDeserializer.cs" />
     <Compile Include="ViewModels\Services\IServiceLocator.cs" />
     <Compile Include="ViewModels\Services\ISubscriptionService.cs" />
@@ -116,6 +122,9 @@
     <Compile Include="ViewModels\Services\Implementations\SubscriptionService.cs" />
     <Compile Include="Views\NavbarView.xaml.cs">
       <DependentUpon>NavbarView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PlayerBar.xaml.cs">
+      <DependentUpon>PlayerBar.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PodcastListView.xaml.cs">
       <DependentUpon>PodcastListView.xaml</DependentUpon>
@@ -143,6 +152,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\NavbarView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PlayerBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
