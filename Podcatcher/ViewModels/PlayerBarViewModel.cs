@@ -28,6 +28,22 @@ namespace Podcatcher.ViewModels
             }
         }
 
+        private bool _isPlaying = false;
+        public bool IsPlaying
+        {
+            get
+            {
+                return _isPlaying;
+            }
+            set
+            {
+                _isPlaying = value;
+                OnPropertyChanged("IsPlaying");
+            }
+        }
+
+        private static int SKIP_DURATION_SECONDS = 10;
+
         public ICommand TogglePlayback { get; set; }
 
         public ICommand SkipForward { get; set; }
@@ -46,16 +62,49 @@ namespace Podcatcher.ViewModels
                 }
             };
             MediaPlayer.Load(item);
+
+            RegisterMediaPlayerEvents();
         }
 
         protected override void InitializeCommands()
         {
             TogglePlayback = new RelayCommand<object>(TogglePlayback_Execute);
+            SkipBack = new RelayCommand<object>(SkipBack_Execute);
+            SkipForward = new RelayCommand<object>(SkipForward_Execute);
+        }
+
+        private void RegisterMediaPlayerEvents()
+        {
+            MediaPlayer.PlaybackStarted += (s, a) =>
+            {
+                IsPlaying = true;
+            };
+            MediaPlayer.PlaybackPaused += (s, a) =>
+            {
+                IsPlaying = false;
+            };
+            MediaPlayer.PlaybackStopped += (s, a) =>
+            {
+                IsPlaying = false;
+            };
         }
 
         private void TogglePlayback_Execute(object _)
         {
-            MediaPlayer.Play();
+            if (IsPlaying)
+                MediaPlayer.Pause();
+            else
+                MediaPlayer.Play();
+        }
+
+        private void SkipForward_Execute(object _)
+        {
+            MediaPlayer.SkipForward(SKIP_DURATION_SECONDS);
+        }
+
+        private void SkipBack_Execute(object _)
+        {
+            MediaPlayer.SkipBack(SKIP_DURATION_SECONDS);
         }
     }
 }
