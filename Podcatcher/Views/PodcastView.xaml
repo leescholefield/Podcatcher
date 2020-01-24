@@ -14,6 +14,7 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="ListBoxItem">
                         <Grid Margin="0, 0, 0, 5">
+                            
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="2*" />
                                 <RowDefinition Height="2*" />
@@ -21,18 +22,18 @@
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="8*" />
-                                <ColumnDefinition Width="2*" />
+                                <ColumnDefinition Width="2*" MinWidth="40" />
                             </Grid.ColumnDefinitions>
                             
                             <Rectangle Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Grid.ColumnSpan="2" Fill="Transparent" Stroke="LightGray" StrokeThickness="1"/>
 
                             <Label Grid.Row="0" Grid.Column="0" Content="{Binding Title}" />
                             <Label Grid.Row="1" Grid.Column="0" Content="{Binding Author}" />
-                            <Label Grid.Row="2" Grid.Column="0" Content="{Binding Description}" />
+                            <Label Grid.Row="2" Grid.Column="0" Content="{Binding Description}"  />
 
-                            <Button Grid.Column="1" Grid.RowSpan="3" Command="{Binding RelativeSource={RelativeSource FindAncestor, 
-                                                                        AncestorType={x:Type UserControl}}, 
-                                                                        Path=DataContext.PlayCommand}" CommandParameter="{Binding}" />
+                            <Button Grid.Column="1" Grid.RowSpan="3" Template="{StaticResource PlayIcon}"
+                                    Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.PlayCommand}"
+                                    CommandParameter="{Binding}" />
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>
@@ -43,7 +44,7 @@
     
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="2*" MaxHeight="400" />
+            <RowDefinition Height="2*" MaxHeight="200" />
             <RowDefinition Height="6*" />
         </Grid.RowDefinitions>
 
@@ -98,7 +99,9 @@
             </Button>
         </Grid>
 
-        <ListBox Grid.Row="1" ItemsSource="{Binding Podcast.Episodes}" ItemContainerStyle="{StaticResource episodeTemplate}" />
+        
+        <ListBox Grid.Row="1" ItemsSource="{Binding Podcast.Episodes}" ItemContainerStyle="{StaticResource episodeTemplate}"
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"/>
 
     </Grid>
 </UserControl>
