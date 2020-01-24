@@ -1,10 +1,5 @@
 ﻿using Podcatcher.Models.Playback;
 using Podcatcher.ViewModels.Commands;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Podcatcher.ViewModels
@@ -42,7 +37,7 @@ namespace Podcatcher.ViewModels
             }
         }
 
-        private static int SKIP_DURATION_SECONDS = 10;
+        private static readonly int SKIP_DURATION_SECONDS = 10;
 
         public ICommand TogglePlayback { get; set; }
 
@@ -58,10 +53,13 @@ namespace Podcatcher.ViewModels
             {
                 Episode = new Models.Episode
                 {
-                    StreamUrl = "http://traffic.libsyn.com/revolutionspodcast/10.26-_The_Far_East_Master.mp3?dest-id=159998"
+                    StreamUrl = "http://traffic.libsyn.com/revolutionspodcast/10.26-_The_Far_East_Master.mp3?dest-id=159998",
+                    Title = "10.26 - The Far East Master",
+                    Author = "Mike Duncan"
                 }
             };
             MediaPlayer.Load(item);
+            Playing = item;
 
             RegisterMediaPlayerEvents();
         }
