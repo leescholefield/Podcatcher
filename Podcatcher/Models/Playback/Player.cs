@@ -82,7 +82,7 @@ namespace Podcatcher.Models.Playback
             if (MediaPlayer == null)
                 throw new InvalidOperationException("Must call Load on the MediaPlayer before attempting to skip");
 
-            var newPos = MediaPlayer.Position.Add(new TimeSpan(0, 0, 0, seconds, 0));
+            var newPos = MediaPlayer.Position.Subtract(new TimeSpan(0, 0, 0, seconds, 0));
             MediaPlayer.Position = newPos;
             PlaybackPositionUpdated?.Invoke(this, new PlayerStateChangedEventArgs(PlayerState.Playing, newPos));
         }
@@ -92,7 +92,7 @@ namespace Podcatcher.Models.Playback
             if (MediaPlayer == null)
                 throw new InvalidOperationException("Must call Load on the MediaPlayer before attempting to skip");
 
-            var newPos = MediaPlayer.Position.Subtract(new TimeSpan(0, 0, 0, seconds, 0));
+            var newPos = MediaPlayer.Position.Add(new TimeSpan(0, 0, 0, seconds, 0));
             PlaybackPositionUpdated?.Invoke(this, new PlayerStateChangedEventArgs(PlayerState.Playing, newPos));
             MediaPlayer.Position = newPos;
         }
@@ -104,7 +104,7 @@ namespace Podcatcher.Models.Playback
 
             MediaPlayer.Stop();
             MediaPlayer.Close();
-            PlaybackStarted?.Invoke(this, new PlayerStateChangedEventArgs(PlayerState.Stopped_On_Request));
+            PlaybackStopped?.Invoke(this, new PlayerStateChangedEventArgs(PlayerState.Stopped_On_Request));
         }
 
         #endregion
