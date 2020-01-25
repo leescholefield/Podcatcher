@@ -1,6 +1,7 @@
 ﻿using Podcatcher.Models.Playback;
 using Podcatcher.ViewModels.Commands;
 using Podcatcher.ViewModels.Services;
+using System;
 using System.Windows.Input;
 
 namespace Podcatcher.ViewModels
@@ -75,17 +76,20 @@ namespace Podcatcher.ViewModels
 
         private void RegisterMediaPlayerEvents()
         {
-            PlaybackService.Player.PlaybackStarted += (s, a) =>
+            PlaybackService.PlaybackStateChanged += (s, a) =>
             {
-                IsPlaying = true;
-            };
-            PlaybackService.Player.PlaybackPaused += (s, a) =>
-            {
-                IsPlaying = false;
-            };
-            PlaybackService.Player.PlaybackStopped += (s, a) =>
-            {
-                IsPlaying = false;
+                switch(a.State)
+                {
+                    case PlaybackState.PLAYING:
+                        IsPlaying = true;
+                        break;
+                    case PlaybackState.PAUSED:
+                    case PlaybackState.STOPPED:
+                        IsPlaying = false;
+                        break;
+                    default:
+                        throw new ArgumentException("No case registered for the PlaybackState " + a.State);
+                }
             };
         }
 
