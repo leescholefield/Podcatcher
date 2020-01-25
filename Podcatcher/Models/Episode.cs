@@ -9,7 +9,7 @@ namespace Podcatcher.Models
 
         private string titleValue = string.Empty;
         private string authorValue = string.Empty;
-        private string streamUrlValue = string.Empty;
+        private string streamUrlValue = null;
         private string descriptionValue = string.Empty;
 
         public event PropertyChangedEventHandler PropertyChanged;
