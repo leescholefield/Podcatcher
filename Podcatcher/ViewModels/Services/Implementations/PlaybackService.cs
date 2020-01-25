@@ -9,10 +9,11 @@ namespace Podcatcher.ViewModels.Services
 
         #region Properties
 
-        public IPlayer Player { get; private set; }
+        private IPlayer Player { get; set; }
         private MediaItem NowPlaying;
 
         public event EventHandler<MediaItemChangedEventArgs> NowPlayingChanged;
+        public event EventHandler<PlaybackStateChangedEventArgs> PlaybackStateChanged;
 
         #endregion
 
@@ -23,6 +24,21 @@ namespace Podcatcher.ViewModels.Services
         public PlaybackService(IPlayer player)
         {
             Player = player;
+            RegisterEventCallbacks();
+        }
+
+        private void RegisterEventCallbacks()
+        {
+            Player.PlaybackPaused += (s, a) => {
+                PlaybackStateChanged?.Invoke(this, new PlaybackStateChangedEventArgs(PlaybackState.PAUSED));
+            };
+            Player.PlaybackStarted += (s, a) => {
+                PlaybackStateChanged?.Invoke(this, new PlaybackStateChangedEventArgs(PlaybackState.PLAYING));
+            };
+            Player.PlaybackStopped += (s, a) =>
+            {
+                PlaybackStateChanged?.Invoke(this, new PlaybackStateChangedEventArgs(PlaybackState.STOPPED));
+            };
         }
 
         #endregion

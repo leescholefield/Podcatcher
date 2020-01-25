@@ -9,8 +9,7 @@ namespace Podcatcher.ViewModels.Services
     /// </summary>
     public interface IPlaybackService
     {
-
-        IPlayer Player {get;}
+        event EventHandler<PlaybackStateChangedEventArgs> PlaybackStateChanged;
 
         event EventHandler<MediaItemChangedEventArgs> NowPlayingChanged;
 
@@ -33,5 +32,20 @@ namespace Podcatcher.ViewModels.Services
         {
             MediaItem = item;
         }
+    }
+
+    public class PlaybackStateChangedEventArgs : EventArgs
+    {
+        public PlaybackState State { get; private set; }
+
+        public PlaybackStateChangedEventArgs(PlaybackState state)
+        {
+            State = state;
+        }
+    }
+
+    public enum PlaybackState
+    {
+        STOPPED, PAUSED, PLAYING
     }
 }
