@@ -26,12 +26,13 @@ namespace Podcatcher.Models.Database.Tests
         [TestMethod()]
         public void Subscribe_Calls_IDatabase_With_Correct_Dictionary()
         {
-            var podcast = new Podcast { FeedUrl = "feed", Title = "pod title", Author = "pod author" };
+            var podcast = new Podcast { FeedUrl = "feed", Title = "pod title", Author = "pod author", ImageUrl = "image url"};
             var expected = new Dictionary<string, object>()
             {
                 {"feed_url", "feed"},
                 {"title", "pod title" },
-                {"author", "pod author" }
+                {"author", "pod author" },
+                {"image_url", "image url" }
 
             };
 
@@ -56,7 +57,8 @@ namespace Podcatcher.Models.Database.Tests
                 {
                     {"feed_url", "feed val"},
                     {"title", "pod title"},
-                    {"author", "pod author"}
+                    {"author", "pod author"},
+                    {"image_url", "image url" }
                 }
             };
             MockedDb.Setup(x => x.Search("subscriptions", null)).Returns(returnVal);
