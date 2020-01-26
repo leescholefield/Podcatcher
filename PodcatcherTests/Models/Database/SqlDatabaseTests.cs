@@ -67,7 +67,7 @@ namespace Podcatcher.Models.Database.Tests
             PerformNonQueryOnDb("INSERT INTO testing(col1) values('second row')");
 
             var result = Database.Search("testing", new Dictionary<string, object> {
-                { "col1", "'first row'"}
+                { "col1", "first row"}
             });
 
             Assert.AreEqual(1, result.Count);
@@ -88,7 +88,7 @@ namespace Podcatcher.Models.Database.Tests
         public void Search_With_No_Matching_Value_Returns_Empty_List()
         {
             var result = Database.Search("testing", new Dictionary<string, object> {
-                { "col1", "'first row'"}
+                { "col1", "first row"}
             });
 
             Assert.AreEqual(0, result.Count);
@@ -136,7 +136,7 @@ namespace Podcatcher.Models.Database.Tests
             PerformNonQueryOnDb("INSERT INTO testing(col1) values('first row')");
             Database.Delete("testing", new Dictionary<string, object>()
             {
-                {"col1", "'first row'" }
+                {"col1", "first row" }
             });
 
             var conn = new SQLiteConnection(string.Format("Data Source={0};Version=3;New=False;Compress=True", FILE_LOC));
