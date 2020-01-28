@@ -102,6 +102,7 @@
     <Compile Include="ViewModels\Commands\RelayCommand.cs" />
     <Compile Include="ViewModels\Commands\SubscribeCommand.cs" />
     <Compile Include="ViewModels\Commands\ViewSubscriptionsCommand.cs" />
+    <Compile Include="ViewModels\HomePageViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\NavbarViewModel.cs" />
     <Compile Include="ViewModels\PlayerBarViewModel.cs" />
