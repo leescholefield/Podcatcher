@@ -16,18 +16,14 @@ namespace Podcatcher.Models.Database.Tests
 
         private static readonly string FILE_LOC = "test.db";
 
-        private DatabaseInfo Info { get; set; }
+        private TestDbInfo Info { get; set; }
 
         private SqlDatabase Database { get; set; }
 
         [TestInitialize()]
         public void SetupTest()
         {
-            Info = new DatabaseInfo
-            {
-                TableNames = new string[] { "testing" },
-                TableCreationStatements = new string[] { "CREATE TABLE IF NOT EXISTS testing(id INTEGER PRIMARY KEY AUTOINCREMENT, col1 TEXT)" }
-            };
+            Info = new  TestDbInfo();
             Database = new SqlDatabase(FILE_LOC, Info, true);
             PerformNonQueryOnDb("CREATE TABLE IF NOT EXISTS testing(id INTEGER PRIMARY KEY AUTOINCREMENT, col1 TEXT)");
         }
@@ -182,5 +178,24 @@ namespace Podcatcher.Models.Database.Tests
 
         }
         
+    }
+
+    public class TestDbInfo : DatabaseInfo
+    {
+        public override string[] TableCreationStatements
+        {
+            get
+            {
+                return new string[] { "CREATE TABLE IF NOT EXISTS testing (id INTEGER PRIMARY KEY AUTOINCREMENT, col1 TEXT)" };
+            }
+        }
+
+        public override string[] TableNames
+        {
+            get
+            {
+                return new string[] { "testing" };
+            }
+        }
     }
 }

@@ -8,12 +8,7 @@ namespace Podcatcher.Models.Database
         #region Properties
 
         private static readonly string TABLE_NAME = "subscriptions";
-        private static readonly DatabaseInfo DbInfo = new DatabaseInfo()
-        {
-            TableNames = new string[] {TABLE_NAME},
-            TableCreationStatements = new string[] {"CREATE TABLE IF NOT EXISTS " + TABLE_NAME + "(id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "feed_url TEXT UNIQUE, title TEXT, author TEXT, image_url TEXT)"}
-        };
+        private static readonly DatabaseInfo DbInfo = new DatabaseInfo();
 
         private IDatabase Database { get; set; }
 
