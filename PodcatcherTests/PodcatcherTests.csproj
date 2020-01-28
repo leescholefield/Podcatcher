@@ -87,6 +87,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="Models\Database\DatabaseInfoTest.cs" />
     <Compile Include="Models\Database\SqlDatabaseTests.cs" />
     <Compile Include="Models\Database\SubscriptionDbTests.cs" />
     <Compile Include="Models\Deserialization\ItunesResultConverterTests.cs" />
