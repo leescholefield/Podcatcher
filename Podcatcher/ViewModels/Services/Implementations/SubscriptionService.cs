@@ -18,6 +18,11 @@ namespace Podcatcher.ViewModels.Services
             return Db.GetSubscriptions();
         }
 
+        public List<Episode> GetLatestEpisodes(int max)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public void Subscribe(Podcast podcast)
         {
             Db.Subscribe(podcast);

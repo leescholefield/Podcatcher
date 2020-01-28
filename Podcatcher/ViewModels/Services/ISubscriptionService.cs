@@ -24,5 +24,12 @@ namespace Podcatcher.ViewModels.Services
         /// </summary>
         /// <returns></returns>
         List<Podcast> GetSubscriptions();
+
+        /// <summary>
+        /// Returns a list of unplayed episodes from the users subscriptions. 
+        /// </summary>
+        /// <param name="max">Maximum number of Episodes to return.</param>
+        /// <returns>A list of unplayed Episodes, or an empty list if there are no unplayed episodes.</returns>
+        List<Episode> GetLatestEpisodes(int max);
     }
 }
