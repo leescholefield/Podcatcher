@@ -22,7 +22,7 @@
             }
         }
 
-        private static class SubscriptionTable
+        public static class SubscriptionTable
         {
             public static readonly string TABLE_NAME = "subscriptions";
             public static readonly string ID_COLUMN = "id";
@@ -37,7 +37,7 @@
                 TITLE_COLUMN + " TEXT, " + AUTHOR_COLUMN + " TEXT, " + IMAGE_URL_COLUMN + " TEXT)";
         }
 
-        private static class UnplayedTable
+        public static class UnplayedTable
         {
 
             public static readonly string TABLE_NAME = "unplayed";
