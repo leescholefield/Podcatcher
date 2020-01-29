@@ -78,5 +78,31 @@ namespace Podcatcher.Models.Database.Tests
             MockedDb.Verify(x => x.Delete("subscriptions", mockedExpectedDict));
         }
 
+        [TestMethod()]
+        public void GetUnplayedEpsiodes_Converts_IDatabase_Result_To_Episode_Instances()
+        {
+            var returnVal = new List<Dictionary<string, object>>()
+            {
+                new Dictionary<string, object>()
+                {
+                    {"stream_url", "stream url val"},
+                    {"title", "ep title"},
+                    {"author", "ep author"},
+                    {"description", "description val" }
+                }
+            };
+
+            MockedDb.Setup(m => m.Search(DatabaseInfo.UnplayedTable.TABLE_NAME, null)).Returns(returnVal);
+
+            var result = SubDb.GetUnplayedEpisodes();
+            Assert.AreEqual(1, result.Count);
+
+            Episode ep = result[0];
+            Assert.AreEqual("stream url val", ep.StreamUrl);
+            Assert.AreEqual("ep title", ep.Title);
+            Assert.AreEqual("ep author", ep.Author);
+            Assert.AreEqual("description val", ep.Description);
+        }
+
     }
 }

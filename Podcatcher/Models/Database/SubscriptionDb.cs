@@ -46,22 +46,6 @@ namespace Podcatcher.Models.Database
             Database.Insert(TABLE_NAME, vals);
         }
 
-        private Dictionary<string, object> ConvertPodcastPropertiesToDictionary(Podcast podcast)
-        {
-            if (podcast.FeedUrl == null)
-            {
-                throw new NullReferenceException("FeedUrl is null");
-            }
-
-            return new Dictionary<string, object>()
-            {
-                {"feed_url", podcast.FeedUrl},
-                {"title", podcast.Title},
-                {"author", podcast.Author},
-                {"image_url", podcast.ImageUrl}
-            };
-        }
-
         public List<Podcast> GetSubscriptions()
         {
             var result = Database.Search(TABLE_NAME, null);
@@ -75,6 +59,18 @@ namespace Podcatcher.Models.Database
             return pods;
         }
 
+        public List<Episode> GetUnplayedEpisodes()
+        {
+            var result = Database.Search(DatabaseInfo.UnplayedTable.TABLE_NAME, null);
+            List<Episode> eps = new List<Episode>(result.Count);
+            foreach(var dict in result)
+            {
+                eps.Add(ConvertDictionaryToEpisode(dict));
+            }
+
+            return eps;
+        }
+
         private Podcast ConvertDictionaryToPodcast(Dictionary<string, object> dict)
         {
             return new Podcast
@@ -84,6 +80,33 @@ namespace Podcatcher.Models.Database
                 FeedUrl = dict["feed_url"].ToString(),
                 ImageUrl = dict["image_url"].ToString(),
                 Subscribed = true
+            };
+        }
+
+        private Episode ConvertDictionaryToEpisode(Dictionary<string, object> dict)
+        {
+            return new Episode
+            {
+                Title = dict["title"].ToString(),
+                Author = dict["author"].ToString(),
+                Description = dict["description"].ToString(),
+                StreamUrl = dict["stream_url"].ToString()
+            };
+        }
+
+        private Dictionary<string, object> ConvertPodcastPropertiesToDictionary(Podcast podcast)
+        {
+            if (podcast.FeedUrl == null)
+            {
+                throw new NullReferenceException("FeedUrl is null");
+            }
+
+            return new Dictionary<string, object>()
+            {
+                {"feed_url", podcast.FeedUrl},
+                {"title", podcast.Title},
+                {"author", podcast.Author},
+                {"image_url", podcast.ImageUrl}
             };
         }
 
