@@ -32,6 +32,21 @@ namespace Podcatcher.Models.Database
             return new SqlDatabase("subscriptions", DbInfo);
         }
 
+        /// <summary>
+        /// Removes all records from <see cref="DatabaseInfo.UnplayedTable"/> that are older than 30 days.
+        /// </summary>
+        private void PurgeOldUnplayedTable()
+        {
+            // subtract 30 days from now
+            var upper = DateTime.Now.AddDays(-30).Date;
+            var lower = DateTime.MinValue.Date;
+
+            string upperF = upper.ToString("yyyy-MM-dd");
+            string lowerF = lower.ToString("yyyy-MM-dd");
+
+            Database.DeleteBetween(DatabaseInfo.UnplayedTable.TABLE_NAME, "pub_date", lowerF, upperF);
+        }
+
         #endregion
 
         /// <summary>
@@ -61,6 +76,8 @@ namespace Podcatcher.Models.Database
 
         public List<Episode> GetUnplayedEpisodes()
         {
+            PurgeOldUnplayedTable();
+
             var result = Database.Search(DatabaseInfo.UnplayedTable.TABLE_NAME, null);
             List<Episode> eps = new List<Episode>(result.Count);
             foreach(var dict in result)

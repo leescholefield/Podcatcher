@@ -104,5 +104,16 @@ namespace Podcatcher.Models.Database.Tests
             Assert.AreEqual("description val", ep.Description);
         }
 
+        [TestMethod()]
+        public void GetUnplayedEpisodes_Removes_Old_Records_From_Database()
+        {
+            MockedDb.Setup(m => m.Search(DatabaseInfo.UnplayedTable.TABLE_NAME, null)).Returns(new List<Dictionary<string, object>>());
+            SubDb.GetUnplayedEpisodes();
+
+            var expectedUpper = DateTime.Now.AddDays(-30).Date.ToString("yyyy-MM-dd");
+
+            MockedDb.Verify(m => m.DeleteBetween(DatabaseInfo.UnplayedTable.TABLE_NAME, "pub_date", It.IsAny<string>(), expectedUpper));
+        }
+
     }
 }
