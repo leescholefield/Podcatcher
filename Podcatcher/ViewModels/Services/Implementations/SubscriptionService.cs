@@ -20,7 +20,7 @@ namespace Podcatcher.ViewModels.Services
 
         public List<Episode> GetLatestEpisodes(int max)
         {
-            throw new System.NotImplementedException();
+            return Db.GetUnplayedEpisodes();
         }
 
         public void Subscribe(Podcast podcast)
