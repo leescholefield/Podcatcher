@@ -205,6 +205,18 @@ namespace Podcatcher.Models.Database
             }
         }
 
+        public void DeleteBetween(string table, string columnName, object lowerBound, object upperBound)
+        {
+            CreateTables();
+            using (var conn = new SQLiteConnection(_connString))
+            using (var comm = conn.CreateCommand())
+            {
+                conn.Open();
+                comm.CommandText = string.Format("Delete FROM {0} WHERE {1} BETWEEN {2} AND {3}", table, columnName, lowerBound, upperBound);
+                comm.ExecuteNonQuery();
+            }
+        }
+
         #endregion
 
     }

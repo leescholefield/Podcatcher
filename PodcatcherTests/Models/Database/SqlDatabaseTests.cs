@@ -25,7 +25,7 @@ namespace Podcatcher.Models.Database.Tests
         {
             Info = new  TestDbInfo();
             Database = new SqlDatabase(FILE_LOC, Info, true);
-            PerformNonQueryOnDb("CREATE TABLE IF NOT EXISTS testing(id INTEGER PRIMARY KEY AUTOINCREMENT, col1 TEXT)");
+            PerformNonQueryOnDb("CREATE TABLE IF NOT EXISTS testing(id INTEGER PRIMARY KEY AUTOINCREMENT, col1 TEXT, col2 INTEGER)");
         }
 
         [TestCleanup()]
@@ -39,7 +39,8 @@ namespace Podcatcher.Models.Database.Tests
         {
             var vals = new Dictionary<string, object>
             {
-                {"col1", "test value" }
+                {"col1", "test value" },
+                {"col2", 2 }
             };
             Database.Insert("testing", vals);
 
@@ -153,6 +154,29 @@ namespace Podcatcher.Models.Database.Tests
         public void Delete_With_null_For_Values_Throws_Exception()
         {
             Database.Delete("testing", null);
+        }
+
+        [TestMethod()]
+        public void DeleteBetween_Deletes_Record()
+        {
+            PerformNonQueryOnDb("INSERT INTO testing(col2) VALUES (4)");
+            PerformNonQueryOnDb("INSERT INTO testing(col2) VALUES (6)");
+
+            Database.DeleteBetween("testing", "col2", 3, 5);
+
+            int result = -1;
+            // check are deleted
+            using (var conn = new SQLiteConnection(string.Format("Data Source={0};Version=3;New=False;Compress=True", FILE_LOC)))
+            using (var comm = conn.CreateCommand())
+            {
+                conn.Open();
+                comm.CommandText = "SELECT COUNT(*) FROM testing";
+                result = Convert.ToInt32(comm.ExecuteScalar());
+                conn.Close();
+            }
+
+            Assert.AreEqual(1, result);
+
         }
 
         private void PerformNonQueryOnDb(string q)

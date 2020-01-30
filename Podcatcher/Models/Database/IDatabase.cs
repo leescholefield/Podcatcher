@@ -36,5 +36,7 @@ namespace Podcatcher.Models.Database
         /// Deletes all records where every value in <paramref name="values"/> matches.
         /// </summary>
         void Delete(string table, Dictionary<string, object> values);
+
+        void DeleteBetween(string table, string columnName, object lowerBound, object upperBound);
     }
 }
